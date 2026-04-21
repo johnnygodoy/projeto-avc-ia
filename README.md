@@ -8,7 +8,7 @@ O sistema permite simular cenários em tempo real e entender quais fatores mais 
 
 ##  Preview da Aplicação
 
-![Dashboard](assets/dashboard.png)
+![Dashboard](assets/Dashboard/dashboard.png)
 
 ---
 
