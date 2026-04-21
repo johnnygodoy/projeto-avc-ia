@@ -32,9 +32,13 @@ from imblearn.pipeline import Pipeline
 ASSETS_DIR = "assets"
 
 def reset_assets_folder():
-    if os.path.exists(ASSETS_DIR):
-        shutil.rmtree(ASSETS_DIR)
-    os.makedirs(ASSETS_DIR)
+    if not os.path.exists(ASSETS_DIR):
+        os.makedirs(ASSETS_DIR)
+
+    # remove apenas imagens geradas
+    for file in os.listdir(ASSETS_DIR):
+        if file.endswith(".png"):
+            os.remove(os.path.join(ASSETS_DIR, file))
 
 def save_plot(filename):
     path = os.path.join(ASSETS_DIR, filename)

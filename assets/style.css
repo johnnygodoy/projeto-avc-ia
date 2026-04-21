@@ -1,0 +1,94 @@
+/* ================================
+   HEADER
+================================ */
+.header-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+
+.header-container h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.subtitulo {
+    font-size: 20px;
+    margin-top: 12px;
+}
+
+/* ================================
+   MÉTRICA
+================================ */
+[data-testid="stMetric"] {
+    background-color: #1F2937;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* ================================
+   CONTAINER
+================================ */
+.block-container {
+    max-width: 1800px;
+    margin: auto;
+}
+
+/* ================================
+   SIDEBAR TAMANHO
+================================ */
+[data-testid="stSidebar"] {
+    min-width: 320px;
+    max-width: 320px;
+}
+
+section[data-testid="stSidebar"] {
+    width: 340px !important;
+}
+
+section[data-testid="stSidebar"] > div {
+    width: 340px !important;
+}
+
+/* ================================
+   SIDEBAR ESTILO
+================================ */
+[data-testid="stSidebar"] .block-container {
+    padding: 20px;
+}
+
+/* títulos */
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* labels */
+[data-testid="stSidebar"] label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* sliders */
+[data-testid="stSidebar"] .stSlider {
+    margin-bottom: 25px;
+}
+
+/* select */
+[data-testid="stSidebar"] .stSelectbox {
+    margin-bottom: 15px;
+}
+
+/* botão */
+[data-testid="stSidebar"] button {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+}
