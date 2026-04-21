@@ -1,6 +1,25 @@
-# Predição de AVC com Machine Learning
+# Sistema Inteligente de Predição de Risco Cardiovascular com IA
 
-Projeto desenvolvido na pós-graduação com foco em análise de dados e modelos de classificação para prever risco de AVC.
+Aplicação interativa desenvolvida com Machine Learning para prever o risco de doenças cardiovasculares com base em dados clínicos do paciente.
+
+O sistema permite simular cenários em tempo real e entender quais fatores mais influenciam o risco.
+
+---
+
+##  Preview da Aplicação
+
+![Dashboard](assets/dashboard.png)
+
+---
+
+## 🚀 Funcionalidades
+
+-  Predição de risco cardiovascular em tempo real
+-  Classificação: Baixo, Médio ou Alto risco
+-  Visualização dos principais fatores (feature importance)
+-  Interpretabilidade com SHAP (explicabilidade do modelo)
+-  Curva ROC, Precision-Recall e matriz de confusão
+-  Interface interativa com Streamlit
 
 ## Tecnologias
 - Python
