@@ -18,8 +18,11 @@ Etapas do Projeto
 - Interpretabilidade com SHAP
 
 Resultados
-- Acurácia: XX%
-- AUC: XX
+- Acurácia: 72%
+- AUC: 0.80
+- F1-score: 0.73
+- Recall: 0.80
+O modelo apresentou bom desempenho na identificação de casos positivos, com destaque para o alto recall, importante em cenários de saúde.
 
 Como rodar
 
