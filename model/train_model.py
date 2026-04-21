@@ -31,22 +31,29 @@ from imblearn.pipeline import Pipeline
 # ================================
 ASSETS_DIR = "assets"
 
-def reset_assets_folder():
-    if not os.path.exists(ASSETS_DIR):
-        os.makedirs(ASSETS_DIR)
+# arquivos que PODEM ser apagados (gerados)
+FILES_TO_RESET = [
+    "calibration_curve.png",
+    "confusion_matrix.png",
+    "feature_importance.png",
+    "precision_recall.png",
+    "roc_curve.png",
+    "shap_summary.png"
+]
 
-    # remove apenas imagens geradas
-    for file in os.listdir(ASSETS_DIR):
-        if file.endswith(".png"):
-            os.remove(os.path.join(ASSETS_DIR, file))
+def reset_generated_images():
+    for file in FILES_TO_RESET:
+        path = os.path.join(ASSETS_DIR, file)
+        if os.path.exists(path):
+            os.remove(path)
 
 def save_plot(filename):
     path = os.path.join(ASSETS_DIR, filename)
     plt.savefig(path, dpi=300, bbox_inches="tight")
     plt.close()
 
-# limpa pasta antes de rodar
-reset_assets_folder()
+# limpa SOMENTE os gráficos gerados
+reset_generated_images()
 
 
 # ================================
