@@ -24,6 +24,27 @@ Resultados
 - Recall: 0.80
 O modelo apresentou bom desempenho na identificação de casos positivos, com destaque para o alto recall, importante em cenários de saúde.
 
+Visualizações
+
+Curva ROC
+![ROC](assets/roc_curve.png)
+
+Matriz de Confusão
+![Confusion](assets/confusion_matrix.png)
+
+Precision-Recall
+![PR](assets/precision_recall.png)
+
+Calibration Curve
+![Calibration](assets/calibration_curve.png)
+
+Importância das Features
+![Feature Importance](assets/feature_importance.png)
+
+SHAP (Interpretabilidade)
+![SHAP](assets/shap_summary.png)
+
+
 Como rodar
 
 ```bash
