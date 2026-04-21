@@ -1,6 +1,8 @@
 # Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
 # Ambiente virtual
 venv/
@@ -9,12 +11,9 @@ venv/
 # Jupyter
 .ipynb_checkpoints/
 
-# Dados grandes
+# Dados grandes (opcional)
 data/*.csv
-data/*.xlsx
 
-# Modelo treinado (opcional)
-*.pkl
-
-# VS Code
-.vscode/
+# Sistema
+.DS_Store
+Thumbs.db
