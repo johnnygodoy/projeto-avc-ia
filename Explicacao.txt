@@ -1,0 +1,355 @@
+
+Introdução
+
+Inicialmente, foi utilizado o dataset Stroke Prediction, amplamente disponível em plataformas públicas, com o objetivo de prever a ocorrência de Acidente Vascular Cerebral (AVC).
+
+Entretanto, durante a análise exploratória dos dados, foram identificadas limitações relevantes, como baixo volume de registros positivos e pouca profundidade clínica, 
+fatores que comprometeram a capacidade preditiva do modelo.
+Diante desse cenário, optou-se pela substituição pelo Cardiovascular Disease Dataset, que apresenta maior volume de dados e variáveis clínicas mais relevantes, 
+como pressão arterial, colesterol e glicose. Essa mudança possibilitou uma modelagem mais robusta e alinhada com a realidade médica.
+
+
+Metodologia
+
+Foi desenvolvido um modelo de aprendizado de máquina utilizando o algoritmo XGBoost, reconhecido por sua alta performance em problemas de classificação com dados estruturados.
+
+O pipeline de processamento incluiu:
+
+Tratamento de dados ausentes (imputação)
+Normalização de variáveis numéricas
+Separação dos dados em treino e teste com estratificação
+Ajuste de desbalanceamento por meio do parâmetro scale_pos_weight
+
+
+Engenharia de Features
+
+Com base em conhecimento clínico, foram criadas variáveis derivadas para enriquecer a capacidade preditiva do modelo:
+
+Índice de Massa Corporal (BMI)
+Interação entre idade e pressão arterial (pressure_age)
+
+Inicialmente, outras variáveis derivadas foram testadas, porém foram removidas posteriormente devido à redundância e multicolinearidade, identificadas 
+durante a análise exploratória.
+
+
+Análise Exploratória (EDA)
+
+A análise exploratória evidenciou padrões importantes:
+
+Mapa de Correlação
+
+Observou-se associação da variável alvo (cardio) com:
+
+Pressão arterial (ap_hi, ap_lo)
+Idade
+BMI
+
+Além disso, foi identificada forte correlação entre variáveis de pressão arterial, indicando redundância parcial.
+
+
+
+Idade vs Doença
+
+Pacientes com maior idade apresentaram maior incidência de doenças cardiovasculares, comportamento consistente com a literatura médica.
+
+
+Pressão Sistólica vs Doença
+
+A pressão arterial sistólica apresentou valores significativamente mais elevados em pacientes com doença cardiovascular, sendo um dos principais fatores de risco.
+
+
+BMI vs Doença
+
+O BMI apresentou associação moderada com a doença, indicando relação entre obesidade e risco cardiovascular.
+
+
+Qualidade dos Dados
+
+Foram identificados outliers extremos, especialmente em variáveis como BMI e pressão arterial, indicando ruído nos dados. Esses valores foram tratados durante a etapa de limpeza.
+
+
+
+Otimização do Modelo
+
+O modelo foi ajustado com foco na detecção de pacientes em risco, considerando o contexto médico.
+
+Foi aplicada uma estratégia de otimização do threshold baseada em regra de negócio:
+
+Garantia de recall mínimo de 80%
+Maximização da precisão dentro dessa restrição
+
+Essa abordagem reflete aplicações reais, onde o custo de falsos negativos é mais crítico do que o de falsos positivos.
+
+
+
+esultados
+
+O modelo apresentou os seguintes resultados:
+
+Accuracy: ~0.72
+Recall (classe positiva): ~0.80
+Precision (classe positiva): ~0.68
+F1-score: ~0.73
+AUC: ~0.79
+
+Matriz de Confusão: 
+[[4358 2525]
+ [1323 5409]]
+
+TN (True Negative): 4358 → saudáveis corretamente classificados
+FP (False Positive): 2525 → falsos alarmes
+FN (False Negative): 1323 → casos críticos não detectados
+TP (True Positive): 5409 → doentes corretamente identificados
+
+
+Interpretação dos Resultados
+
+O modelo apresenta bom equilíbrio entre detecção e precisão:
+
+Detecta aproximadamente 80% dos casos positivos
+Mantém taxa de falsos positivos em nível controlado
+
+Essa configuração é adequada para aplicações de triagem médica, onde é preferível identificar casos suspeitos do que deixar de detectar pacientes em risco.
+
+
+
+Interpretabilidade (SHAP)
+
+Para garantir transparência nas decisões do modelo, foi utilizada a técnica SHAP (SHapley Additive exPlanations).
+
+Os principais insights foram:
+
+Pressão arterial elevada → forte aumento do risco
+Idade avançada → aumento significativo do risco
+Colesterol elevado → contribuição relevante
+
+Esses resultados estão alinhados com o conhecimento médico, validando o comportamento do modelo.
+
+
+
+Importância das Variáveis
+
+As variáveis mais relevantes foram:
+
+Pressão arterial sistólica (ap_hi)
+Colesterol
+Interação idade × pressão (pressure_age)
+Pressão diastólica (ap_lo)
+BMI
+
+
+Relação entre EDA e Modelo
+
+Os padrões identificados na análise exploratória foram confirmados pelo modelo:
+
+Variáveis importantes nos gráficos também foram relevantes no modelo
+Resultados consistentes entre estatística e aprendizado de máquina
+
+Diferenças observadas são decorrentes de:
+
+Engenharia de atributos
+Normalização
+Pipeline de pré-processamento
+
+
+Aplicação Prática
+
+Foi desenvolvida uma interface interativa utilizando Streamlit, simulando um sistema de apoio à decisão clínica.
+
+O sistema permite:
+
+Inserção de dados do paciente
+Geração de risco em tempo real
+
+
+Conclusão
+
+O modelo desenvolvido demonstrou boa capacidade preditiva, com destaque para a alta sensibilidade na detecção de pacientes em risco cardiovascular.
+
+A combinação de:
+
+Limpeza de dados
+Engenharia de features
+Ajuste de threshold baseado em regra de negócio
+Técnicas de interpretabilidade (SHAP)
+
+resultou em um modelo robusto, interpretável e aplicável.
+
+O modelo não substitui o profissional médico, mas atua como ferramenta de apoio, auxiliando na triagem e priorização de pacientes.
+
+
+
+=========================================================================================================================================================================
+
+Precision (Precisão) modelo diz que é X, ele acerta quanto 0.68.
+Quando o modelo diz que alguém está doente, ele acerta 68% das vezes
+
+Recall (Sensibilidade) De todos que realmente são X, quantos eu detectei 0.80
+O modelo detecta 80% dos doentes
+
+F1-score -  Média harmônica entre precision e recall 0.74
+equilíbrio geral entre precisão e detecção
+
+Support 
+Quantidade real de exemplos daquela classe
+Classe 0: 6883
+Classe 1: 6732
+
+MATRIZ DE CONFUSÃO (O CORAÇÃO DO MODELO)
+[[4358 2525]
+ [1323 5409]]
+
+TN (True Negative)
+acertou saudável
+4358 pessoas
+
+FP (False Positive) falso alarme
+2525 pessoas saudáveis classificadas como doentes
+
+FN (False Negative) erro crítico
+1323 doentes classificados como saudáveis
+
+TP (True Positive) acertou doente
+5409 pessoas
+
+
+O modelo foi calibrado utilizando um threshold otimizado de 0.38, priorizando o recall da classe positiva (pacientes com doença cardiovascular).
+
+Essa abordagem foi adotada visando reduzir falsos negativos, que representam pacientes doentes não identificados pelo modelo.
+
+Como resultado, o modelo atingiu um recall médio de 80%, mantendo uma precisão de aproximadamente 69%, o que representa um equilíbrio adequado para cenários de triagem médica.
+
+
+A curva Precision-Recall evidencia o comportamento do modelo na detecção da classe positiva (doença). Observa-se que o modelo mantém níveis consistentes de precisão mesmo com 
+aumento do recall, indicando capacidade adequada de identificar pacientes com doença sem gerar excesso crítico de falsos positivos.
+
+
+A curva Precision-Recall indica que o modelo mantém níveis elevados de precisão para valores moderados de recall, evidenciando capacidade de identificação eficiente da classe positiva. 
+Observa-se uma degradação gradual da precisão à medida que o recall se aproxima de 1, comportamento esperado em problemas de classificação com trade-off entre sensibilidade e precisão.
+
+
+A curva de calibração demonstra que o modelo apresenta boa correspondência entre probabilidades previstas e probabilidades reais, indicando confiabilidade nas estimativas probabilísticas. 
+Pequenas divergências observadas em faixas de alta probabilidade sugerem leve tendência à superestimação, porém sem impacto significativo na performance geral.
+
+==============================================================================================================================================================================================================
+
+
+Jupyter: 
+
+Para a modelagem preditiva, foi utilizado o algoritmo XGBoost, conhecido por sua alta performance em problemas de classificação e sua capacidade de lidar com dados estruturados.
+
+O modelo foi treinado utilizando variáveis clínicas relevantes, incluindo idade, pressão arterial, colesterol, glicose, índice de massa corporal (BMI) e variáveis derivadas como pressão média e pressão de pulso.
+
+A escolha do XGBoost se justifica pela sua capacidade de capturar relações não lineares entre as variáveis, além de sua robustez frente a dados ruidosos e desbalanceados.
+
+
+SHAP (Interpretabilidade)
+
+Para interpretar as decisões do modelo, foi utilizada a técnica SHAP (SHapley Additive exPlanations), que permite quantificar a contribuição de cada variável na predição individual.
+
+A análise SHAP demonstrou que variáveis como pressão arterial sistólica, idade e BMI possuem maior impacto na predição do risco cardiovascular, corroborando evidências médicas já consolidadas. 
+
+
+1. Heatmap (Correlação)
+
+O mapa de correlação evidenciou que a variável alvo (cardio) possui maior associação com pressão arterial sistólica (ap_hi), pressão diastólica (ap_lo), idade e índice de massa corporal (BMI).
+
+Observa-se também uma forte correlação entre ap_hi e ap_lo, o que indica redundância parcial entre essas variáveis, sendo um comportamento esperado em medidas clínicas de pressão arterial.
+
+
+2. Idade vs Doença
+
+A análise da distribuição da idade mostrou que pacientes com maior idade apresentam maior incidência de doenças cardiovasculares.
+
+Esse comportamento é consistente com a literatura médica, que aponta o envelhecimento como um dos principais fatores de risco.
+
+
+3. Pressão Sistólica vs Doença
+
+A variável pressão arterial sistólica apresentou distribuição significativamente maior em pacientes com doença cardiovascular.
+
+Esse resultado reforça a relevância clínica da hipertensão como um dos principais fatores associados a eventos cardiovasculares.
+
+4. BMI vs Doença
+
+O índice de massa corporal (BMI) apresentou valores mais elevados em pacientes com doença cardiovascular, indicando associação entre sobrepeso/obesidade e risco aumentado.
+
+Essa relação é amplamente documentada na literatura, validando a inclusão da variável no modelo.
+
+
+
+5. Distribuição da variável alvo
+
+A análise da variável alvo indicou um leve desbalanceamento entre as classes, com proporções relativamente próximas entre pacientes com e sem doença cardiovascular.
+
+Esse cenário justifica o uso de métricas como recall e F1-score, além de técnicas de balanceamento durante o treinamento do modelo. 
+
+
+
+OBS: Os resultados obtidos na análise exploratória estão alinhados com os padrões identificados pelo modelo XGBoost, 
+evidenciando consistência entre os dados e a capacidade preditiva do modelo.
+
+Variáveis identificadas como relevantes nos gráficos, como pressão arterial, idade e BMI, também foram destacadas pelo modelo através das análises de 
+importância de variáveis e SHAP, indicando coerência entre análise estatística e aprendizado de máquina.
+
+
+
+“Os resultados do modelo final diferem da análise exploratória devido ao uso de engenharia de atributos, normalização e pipeline de pré-processamento,
+ que alteram a distribuição dos dados e o comportamento do modelo.”
+
+ Os resultados obtidos na análise exploratória diferem dos apresentados no modelo final, pois este incorpora técnicas avançadas como engenharia de atributos, 
+ normalização de dados e pipelines de pré-processamento. Essas transformações modificam a distribuição dos dados e influenciam diretamente na importância 
+ das variáveis e nas explicações geradas pelo modelo (SHAP), tornando o modelo final mais robusto e representativo.
+
+
+
+A análise exploratória dos dados indicou que idade e pressão 
+
+arterial apresentam associação relevante com a variável alvo.
+ A pressão sistólica demonstrou maior capacidade discriminativa
+  entre os grupos. Entretanto, observou-se forte multicolinearidade entre variáveis derivadas de pressão arterial e idade.
+   Além disso, foram identificados outliers extremos em variáveis como BMI, indicando possível presença de ruído nos dados,
+   o que pode impactar a performance do modelo.
+
+O modelo final foi ajustado com base em uma restrição mínima de recall de 80%, 
+garantindo alta capacidade de detecção de casos positivos. Dentro dessa restrição,
+buscou-se maximizar a precisão, reduzindo a taxa de falsos positivos. 
+O resultado foi um modelo equilibrado, adequado para aplicações de triagem, 
+com bom compromisso entre sensibilidade e especificidade.
+
+
+ COMANDOS BASH: 
+1. CRIAR E ATIVAR AMBIENTE VIRTUAL
+ python -m venv venv
+source venv/bin/activate 
+
+python -m venv venv
+venv\Scripts\activate
+
+Rodar modelo: 
+python model/train_model.py
+
+2. INSTALAR DEPENDÊNCIAS
+
+pip install pandas numpy matplotlib seaborn shap xgboost scikit-learn imbalanced-learn streamlit
+pip install notebook jupyterlab
+
+3. GERAR requirements.txt
+pip freeze > requirements.txt
+
+4. RODAR DASHBOARD (STREAMLIT)
+
+# ativar ambiente
+venv\Scripts\activate
+
+# instalar tudo
+pip install -r requirements.txt
+
+# rodar jupyter
+jupyter notebook
+
+# em outro terminal
+streamlit run app/app.py
+
+PARAR O STREAMLIT
+CTRL + C
