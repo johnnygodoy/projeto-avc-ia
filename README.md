@@ -1,4 +1,4 @@
-### Predição de AVC com Machine Learning
+# Predição de AVC com Machine Learning
 
 Projeto desenvolvido na pós-graduação com foco em análise de dados e modelos de classificação para prever risco de AVC.
 
