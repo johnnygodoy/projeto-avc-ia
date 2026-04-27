@@ -1,0 +1,40 @@
+# =========================
+# BASE
+# =========================
+pandas
+numpy
+scikit-learn
+xgboost
+
+# =========================
+# VISUALIZAÇÃO
+# =========================
+matplotlib
+seaborn
+
+# =========================
+# INTERPRETABILIDADE
+# =========================
+shap
+
+# =========================
+# BALANCEAMENTO
+# =========================
+imbalanced-learn
+
+# =========================
+# NOTEBOOK
+# =========================
+jupyter
+ipykernel
+
+# =========================
+# STREAMLIT (DEV LOCAL)
+# =========================
+streamlit
+
+# =========================
+# UTILITÁRIOS
+# =========================
+python-dateutil
+tqdm
