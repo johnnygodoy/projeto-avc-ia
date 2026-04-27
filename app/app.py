@@ -204,7 +204,7 @@ if st.sidebar.button("🔍 Analisar Risco"):
 
         plt.tight_layout()
 
-        st.pyplot(fig, width=True)
+        st.pyplot(fig, use_container_width=True)
 
     # ===============================
     # 📊 FATORES
