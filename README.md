@@ -1,8 +1,8 @@
 # Sistema Inteligente de Predição de Risco Cardiovascular com IA
 
-Aplicação interativa desenvolvida com Machine Learning para prever o risco de doenças cardiovasculares com base em dados clínicos do paciente.
+Aplicação interativa baseada em Machine Learning para prever o risco de doenças cardiovasculares a partir de dados clínicos.
 
-O sistema permite simular cenários em tempo real e entender quais fatores mais influenciam o risco.
+O sistema permite simulações em tempo real e fornece explicações sobre os fatores que mais influenciam o risco, contribuindo para análises mais transparentes e interpretáveis.
 
 ---
 
@@ -41,7 +41,7 @@ O sistema permite simular cenários em tempo real e entender quais fatores mais 
 - AUC: 0.80
 - F1-score: 0.73
 - Recall: 0.80
-O modelo apresentou bom desempenho na identificação de casos positivos, com destaque para o alto recall, importante em cenários de saúde.
+O modelo apresentou bom desempenho, com foco em alto recall, reduzindo falsos negativos — fator crítico em aplicações médicas.
 
 ## Visualizações do Modelo
 
@@ -91,10 +91,42 @@ Isso traz **transparência e explicabilidade**, fundamentais em aplicações de 
 
 ![SHAP](assets/shap_summary.png)
 
-**Nota:** O modelo foi otimizado para priorizar recall, reduzindo o risco de não identificar casos positivos, o que é essencial em aplicações médicas.
+**Nota:** O modelo foi otimizado para priorizar recall, reduzindo o risco de não identificar casos positivos, o que é essencial em aplicações médicas. 
 
-### Como rodar
+## Estrutura do Projeto
+sistema-predicao-risco-cardiovascular/
+│
+├── app/                # Interface Streamlit
+├── data/               # Dataset
+├── model/              # Modelo treinado
+├── assets/             # Imagens e gráficos
+├── notebooks/          # Análises exploratórias
+├── requirements.txt
+└── README.md 
 
-```bash
+## Observação
+O modelo foi otimizado para priorizar o recall, reduzindo o risco de não identificar pacientes com potencial problema cardiovascular — abordagem essencial em cenários de saúde.
+
+## Como Executar o Projeto
+
+# Criar ambiente virtual
+python -m venv venv
+
+# Ativar ambiente (Windows)
+venv\Scripts\activate
+
+# Instalar dependências
 pip install -r requirements.txt
-streamlit run app/app.py
+
+# Executar aplicação
+python -m streamlit run app/app.py 
+
+Autor
+
+## João Roberto Godoy Rodrigues
+Projeto desenvolvido para pós-graduação em Inteligência Artificial. 
+
+
+## 🌐 Acesse a aplicação online
+
+🔗 https://seu-app.streamlit.app

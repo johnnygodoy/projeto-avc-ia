@@ -1,9 +1,11 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import pickle
 import matplotlib.pyplot as plt
 import os
+
+import warnings
+warnings.filterwarnings("ignore")
 
 # ===============================
 # CONFIG (TEM QUE SER PRIMEIRO)
@@ -13,7 +15,6 @@ st.set_page_config(
     layout="wide",
     page_icon="🫀"
 )
-
 # ===============================
 # LOAD CSS
 # ===============================
@@ -32,7 +33,10 @@ load_css()
 # ===============================
 @st.cache_resource
 def load_model():
-    with open("model/model.pkl", "rb") as f:
+    base_dir = os.path.dirname(os.path.dirname(__file__))
+    model_path = os.path.join(base_dir, "model", "model.pkl")
+
+    with open(model_path, "rb") as f:
         return pickle.load(f)
 
 model = load_model()
@@ -200,7 +204,7 @@ if st.sidebar.button("🔍 Analisar Risco"):
 
         plt.tight_layout()
 
-        st.pyplot(fig, width="stretch")
+        st.pyplot(fig, width=True)
 
     # ===============================
     # 📊 FATORES
