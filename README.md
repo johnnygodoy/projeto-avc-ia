@@ -129,4 +129,4 @@ Projeto desenvolvido para pós-graduação em Inteligência Artificial.
 
 ## 🌐 Acesse a aplicação online
 
-🔗 https://seu-app.streamlit.app
+🔗 https://risco-cardiovascular-ia.streamlit.app/
