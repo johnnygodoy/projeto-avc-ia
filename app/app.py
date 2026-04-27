@@ -9,7 +9,7 @@ import os
 # CONFIG (TEM QUE SER PRIMEIRO)
 # ===============================
 st.set_page_config(
-    page_title="Cardio Risk AI",
+    page_title="Predição de Risco Cardiovascular com IA",
     layout="wide",
     page_icon="🫀"
 )
