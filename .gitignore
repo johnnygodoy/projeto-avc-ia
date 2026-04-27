@@ -11,9 +11,6 @@ venv/
 # Jupyter
 .ipynb_checkpoints/
 
-# Dados grandes (opcional)
-data/*.csv
-
 # Sistema
 .DS_Store
 Thumbs.db
